@@ -1,0 +1,12 @@
+{
+    "cientes":[
+        {
+            "nombre":"Juan",
+            "id": 1
+        },
+        {
+            "nombre":"Pera",
+            "id": 2
+        }
+    ]
+}
