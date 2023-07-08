@@ -1,12 +1,22 @@
 {
-    "cientes":[
-        {
-            "nombre":"Juan",
-            "id": 1
-        },
-        {
-            "nombre":"Pera",
-            "id": 2
-        }
-    ]
+  "cientes": [
+    {
+      "nombre": "Esperanza",
+      "apellido": "Najera",
+      "email": "esperanza.nave@gmail.com",
+      "telefono": "123-123-1234",
+      "empresa": "SISNA",
+      "puesto": "Director General",
+      "id": 1
+    },
+    {
+      "nombre": "Luis",
+      "apellido": "Gaytan",
+      "email": "luis.g@correo.com",
+      "telefono": "123-123-1234",
+      "empresa": "Personal",
+      "puesto": "Freelancer",
+      "id": 2
+    }
+  ]
 }
