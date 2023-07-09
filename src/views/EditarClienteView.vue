@@ -1,5 +1,5 @@
 <script setup>
-    import axios from '../lib/axios'
+    import { onMounted } from 'vue'
     import { FormKit } from '@formkit/vue'
     import { useRoute, useRouter } from 'vue-router'
     import RouterLink from '../components/UI/RouterLink.vue';
@@ -8,6 +8,14 @@ import ClienteService from '../services/ClienteService';
 
     const route = useRoute()
     const router = useRouter()
+
+    const { id } = route.params
+    
+    onMounted(()=>{
+        ClienteService.obtenerCliente(id)
+           .then(({data})=> console.log(data))
+           .catch(error => console.log(error))
+    })
 
     defineProps({
         titulo:{
@@ -20,13 +28,7 @@ import ClienteService from '../services/ClienteService';
     }
 
     const handelSubmit = (data)=>{
-         data.estado = 1
-         ClienteService.agregarCliente(data)
-         .then(respuesta => {
-            //Redireccionar
-            router.push({ name: 'listado-clientes'})
-         })
-         .catch(error => console.log(error))
+     
     }
 </script>
 
