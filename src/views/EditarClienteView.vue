@@ -1,5 +1,5 @@
 <script setup>
-    import { onMounted } from 'vue'
+    import { onMounted,reactive } from 'vue'
     import { FormKit } from '@formkit/vue'
     import { useRoute, useRouter } from 'vue-router'
     import RouterLink from '../components/UI/RouterLink.vue';
@@ -10,10 +10,15 @@ import ClienteService from '../services/ClienteService';
     const router = useRouter()
 
     const { id } = route.params
+
+    const formData = reactive({})
     
     onMounted(()=>{
         ClienteService.obtenerCliente(id)
-           .then(({data})=> console.log(data))
+           .then(({data})=> {
+              Object.assign(formData, data)
+              //formData.value = data ese se usa cuando cambias reactive a ref en la declaracion del objeto
+           })
            .catch(error => console.log(error))
     })
 
@@ -23,12 +28,12 @@ import ClienteService from '../services/ClienteService';
         }
     })
 
-    const formData = {
-        nombre:'Esperanza'
-    }
+    
 
     const handelSubmit = (data)=>{
-     
+     ClienteService.actualizarCliente(id, data)
+                   .then(()=> router.push({ name: 'listado-clientes' }))
+                   .catch(error => console.log(error))
     }
 </script>
 
@@ -44,10 +49,11 @@ import ClienteService from '../services/ClienteService';
         <div class="mx-auto md:w-2/3 py-20 px-6">
             <FormKit
                    type="form"
-                   submit-label="Agregar cliente"
+                   submit-label="Guardar cambios"
                    incomplete-message="No se pudo enviar, revisa los mensajes"
                    @submit="handelSubmit"
                    :value="formData"
+                   @value="formData"
             >
 
                    <FormKit 
@@ -57,6 +63,7 @@ import ClienteService from '../services/ClienteService';
                         placeholder="Nombre de Cliente"
                         validation="required"
                         :validation-messages="{required: 'El Nombre del Cliente es Obligatorio'}"
+                        v-model="formData.nombre"
                    />
 
                    <FormKit 
@@ -66,6 +73,7 @@ import ClienteService from '../services/ClienteService';
                         placeholder="Apellido de Cliente"
                         validation="required"
                         :validation-messages="{required: 'El Apellido del Cliente es Obligatorio'}"
+                        v-model="formData.apellido"
                    />
 
                    <FormKit 
@@ -75,6 +83,7 @@ import ClienteService from '../services/ClienteService';
                         placeholder="Email de Cliente"
                         validation="required|email"
                         :validation-messages="{required: 'El Email del Cliente es Obligatorio', email:'Coloca un email válido'}"
+                        v-model="formData.email"
                    />
 
                    <FormKit 
@@ -84,6 +93,7 @@ import ClienteService from '../services/ClienteService';
                         placeholder="Teléfono: XXX-XXX-XXXX"
                         validation="*matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/"
                         :validation-messages="{matches: 'El formato no es válido'}"
+                        v-model="formData.telefono"
                    />
 
                    <FormKit 
@@ -91,6 +101,7 @@ import ClienteService from '../services/ClienteService';
                         label="Empresa"
                         name="empresa"
                         placeholder="Empresa de Cliente"
+                        v-model="formData.empresa"
                    />
 
                    <FormKit 
@@ -98,6 +109,7 @@ import ClienteService from '../services/ClienteService';
                         label="Puesto"
                         name="puesto"
                         placeholder="Puesto de Cliente"
+                        v-model="formData.puesto"
                    />
 
           </FormKit>
