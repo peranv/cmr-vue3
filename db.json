@@ -7,7 +7,7 @@
       "telefono": "123-123-1234",
       "empresa": "Personal",
       "puesto": "Comerciante",
-      "estado": 0,
+      "estado": false,
       "id": 4
     },
     {
@@ -17,18 +17,8 @@
       "telefono": "123-123-1234",
       "empresa": "SISNA",
       "puesto": "Director General",
-      "estado": 1,
+      "estado": true,
       "id": 5
-    },
-    {
-      "nombre": "Luis",
-      "apellido": "Davila",
-      "email": "luis@correo.com",
-      "telefono": "123-123-1234",
-      "empresa": "Itic security",
-      "puesto": "Ingeniero de seguridad",
-      "estado": 1,
-      "id": 6
     }
   ]
 }

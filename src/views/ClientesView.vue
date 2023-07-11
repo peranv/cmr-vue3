@@ -28,10 +28,20 @@
     })
 
     const actualizarEstado = ({id, estado}) =>{
-        ClienteService.cambiarEstado(id, !estado)
+        ClienteService.cambiarEstado(id, {estado: !estado})
         .then(()=>{
-            
+            const i = clientes.value.findIndex(cliente => cliente.id === id)
+            clientes.value[i].estado = !estado
         })
+        .catch(error => console.log(error))
+    }
+
+    const eliminarCliente = id =>{
+        ClienteService.eliminarCliente(id)
+           .then(() => {
+              clientes.value = clientes.value.filter(cliente => cliente.id !== id)
+           })
+           .catch(error => console.log(error))
     }
 </script>
 
@@ -63,6 +73,7 @@
                           :key="cliente.id"
                           :cliente="cliente"
                           @actualizar-estado="actualizarEstado"
+                          @eliminar-cliente="eliminarCliente"
                       />
                   </tbody>
               </table>
