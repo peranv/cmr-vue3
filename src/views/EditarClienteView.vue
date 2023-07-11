@@ -4,7 +4,7 @@
     import { useRoute, useRouter } from 'vue-router'
     import RouterLink from '../components/UI/RouterLink.vue';
     import Heading from '../components/UI/Heading.vue';
-import ClienteService from '../services/ClienteService';
+    import ClienteService from '../services/ClienteService';
 
     const route = useRoute()
     const router = useRouter()

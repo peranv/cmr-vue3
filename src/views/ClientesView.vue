@@ -26,6 +26,13 @@
     const existenClientes = computed(()=>{
         return clientes.value.length > 0
     })
+
+    const actualizarEstado = ({id, estado}) =>{
+        ClienteService.cambiarEstado(id, !estado)
+        .then(()=>{
+            
+        })
+    }
 </script>
 
 
@@ -55,6 +62,7 @@
                           v-for="cliente in clientes"
                           :key="cliente.id"
                           :cliente="cliente"
+                          @actualizar-estado="actualizarEstado"
                       />
                   </tbody>
               </table>
